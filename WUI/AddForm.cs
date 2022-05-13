@@ -31,8 +31,16 @@ namespace WUI
             FillSuppliers();
             CheckSuppliersCountToEnableButton();
             if (!string.IsNullOrWhiteSpace(FilePath))
+            {
                 GetSuppliersImport();
-            CheckSuppliersCountToEnableButton();
+                CheckSuppliersCountToEnableButton();
+                foreach (Supplier supplier in Suppliers)
+                {
+                    if(supplier.ID >= Supplier._ID)
+                        Supplier._ID = supplier.ID;                    
+                    Supplier._ID++;
+                }
+            }
         }
         private void AddForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -285,8 +293,9 @@ namespace WUI
         {
             try
             {
-            Suppliers = ManipulateData.ReadFileData(FilePath);
-            }catch (Exception ex)
+                Suppliers = ManipulateData.ReadFileData(FilePath);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Format du csv incompatible");
             }
@@ -300,6 +309,7 @@ namespace WUI
             EnableConfirmButton();
             FillSuppliers();
             FilePath = null;
+            Supplier._ID = 1;
         }
     }
 }
