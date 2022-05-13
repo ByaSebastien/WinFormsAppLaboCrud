@@ -83,6 +83,7 @@
             this.importButton.TabIndex = 6;
             this.importButton.Text = "Importer document";
             this.importButton.UseVisualStyleBackColor = false;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
             // TitleForm
             // 
