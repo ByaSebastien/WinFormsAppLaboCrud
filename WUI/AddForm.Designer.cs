@@ -83,7 +83,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(8, 3, 0, 3);
-            this.menuStrip.Size = new System.Drawing.Size(1219, 25);
+            this.menuStrip.Size = new System.Drawing.Size(870, 25);
             this.menuStrip.TabIndex = 21;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -136,10 +136,10 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateToolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 485);
+            this.statusStrip.Location = new System.Drawing.Point(0, 489);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 18, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1219, 22);
+            this.statusStrip.Size = new System.Drawing.Size(870, 22);
             this.statusStrip.TabIndex = 22;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -147,7 +147,7 @@
             // 
             this.dateToolStripStatusLabel.ForeColor = System.Drawing.Color.Black;
             this.dateToolStripStatusLabel.Name = "dateToolStripStatusLabel";
-            this.dateToolStripStatusLabel.Size = new System.Drawing.Size(1200, 17);
+            this.dateToolStripStatusLabel.Size = new System.Drawing.Size(851, 17);
             this.dateToolStripStatusLabel.Spring = true;
             this.dateToolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -513,7 +513,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1219, 507);
+            this.ClientSize = new System.Drawing.Size(870, 511);
             this.Controls.Add(this.leftArrowButton);
             this.Controls.Add(this.rightArrowButton);
             this.Controls.Add(this.groupBox1);

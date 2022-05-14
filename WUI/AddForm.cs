@@ -50,11 +50,11 @@ namespace WUI
         }
         private void phoneNumberTextBox_TextChanged_1(object sender, EventArgs e)
         {
-            validPhoneNumberLabel.ForeColor = Utility.ValidationUtility.ValidPhoneNumber(phoneNumberTextBox.Text) ? Color.Green : Color.Red;
+            validPhoneNumberLabel.ForeColor = ValidationUtility.ValidPhoneNumber(phoneNumberTextBox.Text) ? Color.Green : Color.Red;
         }
         private void emailAddressTextBox_TextChanged_1(object sender, EventArgs e)
         {
-            validEmailAddressLabel.ForeColor = Utility.ValidationUtility.ValidEmailAddress(emailAddressTextBox.Text) ? Color.Green : Color.Red;
+            validEmailAddressLabel.ForeColor = ValidationUtility.ValidEmailAddress(emailAddressTextBox.Text) ? Color.Green : Color.Red;
         }
         private void addButton_Click_1(object sender, EventArgs e)
         {
@@ -78,14 +78,12 @@ namespace WUI
             Size = new Size(886, 547);
             rightArrowButton.Visible = false;
             leftArrowButton.Visible = true;
-            plusButton.Visible = true;
         }
         private void leftArrowButton_Click_1(object sender, EventArgs e)
         {
             Size = new Size(472, 547);
             rightArrowButton.Visible = true;
             leftArrowButton.Visible = false;
-            plusButton.Visible = false;
         }
         private void suppliersDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
