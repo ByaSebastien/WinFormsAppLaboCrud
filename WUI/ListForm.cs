@@ -22,6 +22,7 @@ namespace WUI
         {
             suppliersDataGridView.DataSource = Suppliers.ToArray();
             WindowState = FormWindowState.Maximized;
+            suppliersDataGridView.Rows[0].Selected = false;
         }
     }
 }

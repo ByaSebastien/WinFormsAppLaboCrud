@@ -6,19 +6,38 @@ namespace DAL
 {
     public static class FileDataAccess
     {
+        /// <summary>
+        /// Contact DAL to read a file path and return a Ilist of suppliers.
+        /// </summary>
+        /// <param name="pPath">string file path</param>
+        /// <returns>An Ilist of suppliers.</returns>
+        /// <exception cref="Exception"></exception>
         public static IList<Supplier> ReadCsvFile(string pPath)
         {
-            CsvFileDescription csvFileDescription = new CsvFileDescription
+            try
             {
-                FirstLineHasColumnNames = true,
-                IgnoreUnknownColumns = true,
-                SeparatorChar = ';',
-            };
-            CsvContext csvContext = new CsvContext();
-            var suppliers = csvContext.Read<Supplier>(pPath,csvFileDescription);
-            return suppliers.ToList();
+                CsvFileDescription csvFileDescription = new CsvFileDescription
+                {
+                    FirstLineHasColumnNames = true,
+                    IgnoreUnknownColumns = true,
+                    SeparatorChar = ';',
+                };
+                CsvContext csvContext = new CsvContext();
+                var suppliers = csvContext.Read<Supplier>(pPath, csvFileDescription);
+                return suppliers.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Format du csv incompatible");
+            }
+            return null;
         }
-        public static void WriteCsvFile(IList<Supplier>pSuppliers,string pPath)
+        /// <summary>
+        /// Contact DAL to write an Ilist into a file
+        /// </summary>
+        /// <param name="pSuppliers">Ilist of suppliers</param>
+        /// <param name="pPath">string file path</param>
+        public static void WriteCsvFile(IList<Supplier> pSuppliers, string pPath)
         {
             CsvFileDescription csvFileDescription = new CsvFileDescription
             {
@@ -27,7 +46,7 @@ namespace DAL
                 SeparatorChar = ';',
             };
             CsvContext csvContext = new CsvContext();
-            csvContext.Write(pSuppliers,pPath,csvFileDescription);
+            csvContext.Write(pSuppliers, pPath, csvFileDescription);
         }
     }
 }

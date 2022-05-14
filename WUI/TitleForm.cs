@@ -23,7 +23,6 @@ namespace WUI
                 Visible = false;
                 addForm.ShowDialog();
             }
-            Visible = true;
         }
         private void importButton_Click(object sender, EventArgs e)
         {
@@ -33,16 +32,13 @@ namespace WUI
                 ofd.Title = "Lire fichier csv";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    this.Cursor = Cursors.WaitCursor;
                     string filePath = ofd.FileName;
-                    this.Cursor = Cursors.Default;
                     using (AddForm addForm = new AddForm())
                     {
                         addForm.FilePath = filePath;
                         Visible = false;
                         addForm.ShowDialog();
                     }
-                    Visible = true;
                 }
             }
         }

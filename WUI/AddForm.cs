@@ -28,18 +28,12 @@ namespace WUI
         {
             dateToolStripStatusLabel.Text = DateTime.Now.ToShortTimeString();
             Size = new Size(886, 547);
-            FillSuppliers();
-            CheckSuppliersCountToEnableButton();
             if (!string.IsNullOrWhiteSpace(FilePath))
             {
                 GetSuppliersImport();
-                CheckSuppliersCountToEnableButton();
-                foreach (Supplier supplier in Suppliers)
-                {
-                    if(supplier.ID >= Supplier._ID)
-                        Supplier._ID = supplier.ID;                    
-                    Supplier._ID++;
-                }
+                CheckSuppliersCountToSwitchEnabledListButton();
+                FillSuppliers();
+                suppliersDataGridView.Rows[0].Selected = false;
             }
         }
         private void AddForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -64,22 +58,16 @@ namespace WUI
         }
         private void addButton_Click_1(object sender, EventArgs e)
         {
-            string name = nameTextBox.Text;
-            string phoneNumber = phoneNumberTextBox.Text;
-            string emailAddress = emailAddressTextBox.Text;
-            string city = cityTextBox.Text;
-            bool ordered = orderedCheckBox.Checked;
-
-            if (Utility.ValidationUtility.ValidAll(name, phoneNumber, emailAddress))
+            if (ValidationUtility.ValidAll(nameTextBox.Text, phoneNumberTextBox.Text, emailAddressTextBox.Text))
             {
                 Cursor.Current = Cursors.WaitCursor;
-                Suppliers.Add(new Supplier(name, phoneNumber, emailAddress, city, ordered));
+                Suppliers.Add(new Supplier(nameTextBox.Text, phoneNumberTextBox.Text, emailAddressTextBox.Text, cityTextBox.Text, orderedCheckBox.Checked));
                 FillSuppliers();
-                if (Suppliers.Count > 0)
-                    suppliersDataGridView.Rows[0].Selected = false;
+                suppliersDataGridView.Rows[0].Selected = false;
                 ClearTextBoxs();
-                EnableConfirmButton();
-                CheckSuppliersCountToEnableButton();
+                if (modifyButton.Enabled)
+                    EnabledSwitchModifyAndRemoveButton();
+                CheckSuppliersCountToSwitchEnabledListButton();
                 Cursor.Current = Cursors.Default;
             }
             else
@@ -105,13 +93,8 @@ namespace WUI
             {
                 RowSelected = e.RowIndex;
                 suppliersDataGridView.Rows[e.RowIndex].Selected = true;
-                if (!modifyButton.Enabled && !removeButton.Enabled)
-                {
-                    modifyButton.Enabled = true;
-                    modifyButton.BackColor = Color.DarkCyan;
-                    removeButton.Enabled = true;
-                    removeButton.BackColor = Color.DarkCyan;
-                }
+                if (!modifyButton.Enabled)
+                    EnabledSwitchModifyAndRemoveButton();
             }
         }
         private void modifyButton_Click(object sender, EventArgs e)
@@ -128,9 +111,11 @@ namespace WUI
         {
             Suppliers.RemoveAt(RowSelected);
             FillSuppliers();
+            suppliersDataGridView.Rows[0].Selected = false;
             ClearTextBoxs();
-            EnableConfirmButton();
-            CheckSuppliersCountToDisableButton();
+            if (modifyButton.Enabled)
+                EnabledSwitchModifyAndRemoveButton();
+            CheckSuppliersCountToSwitchEnabledListButton();
         }
         private void confirmModifyButton_Click(object sender, EventArgs e)
         {
@@ -139,7 +124,7 @@ namespace WUI
             string emailAddress = emailAddressTextBox.Text;
             string city = cityTextBox.Text;
             bool ordered = orderedCheckBox.Checked;
-            if (Utility.ValidationUtility.ValidAll(name, phoneNumber, emailAddress))
+            if (ValidationUtility.ValidAll(name, phoneNumber, emailAddress))
             {
                 confirmModifyButton.Visible = false;
                 cancelModifyButton.Visible = false;
@@ -150,8 +135,10 @@ namespace WUI
                 Suppliers[RowSelected].Ordered = orderedCheckBox.Checked;
                 Suppliers[RowSelected].CreationDateTime = DateTime.Now;
                 FillSuppliers();
+                suppliersDataGridView.Rows[0].Selected = false;
                 ClearTextBoxs();
-                EnableConfirmButton();
+                if (modifyButton.Enabled)
+                    EnabledSwitchModifyAndRemoveButton();
             }
             else
                 MessageBox.Show("Formulaire non valide.");
@@ -162,6 +149,9 @@ namespace WUI
             cancelModifyButton.Visible = false;
             ClearTextBoxs();
             FillSuppliers();
+            suppliersDataGridView.Rows[0].Selected = false;
+            if (modifyButton.Enabled)
+                EnabledSwitchModifyAndRemoveButton();
         }
         private void listButton_Click(object sender, EventArgs e)
         {
@@ -190,55 +180,8 @@ namespace WUI
             {
                 suppliersDataGridView.Rows.Add(supplier.ID, supplier.Name, supplier.Ordered);
             }
+            suppliersDataGridView.Rows[0].Selected = false;
             cancelModifyButton.Visible = true;
-        }
-        private void FillSuppliers()
-        {
-            suppliersDataGridView.Rows.Clear();
-            foreach (Supplier supplier in Suppliers)
-            {
-                suppliersDataGridView.Rows.Add(supplier.ID, supplier.Name, supplier.Ordered);
-            }
-        }
-        private void ClearTextBoxs()
-        {
-            nameTextBox.Text = "";
-            phoneNumberTextBox.Text = "";
-            emailAddressTextBox.Text = "";
-            cityTextBox.Text = "";
-            orderedCheckBox.Checked = false;
-        }
-        private void EnableConfirmButton()
-        {
-            if (modifyButton.Enabled && removeButton.Enabled)
-            {
-                modifyButton.Enabled = false;
-                modifyButton.BackColor = Color.Silver;
-                removeButton.Enabled = false;
-                removeButton.BackColor = Color.Silver;
-            }
-        }
-        private void CheckSuppliersCountToEnableButton()
-        {
-            if (Suppliers.Count > 0)
-            {
-                if (!listButton.Enabled)
-                {
-                    listButton.Enabled = true;
-                    listButton.BackColor = Color.DarkCyan;
-                }
-            }
-        }
-        private void CheckSuppliersCountToDisableButton()
-        {
-            if (Suppliers.Count == 0)
-            {
-                if (listButton.Enabled)
-                {
-                    listButton.Enabled = false;
-                    listButton.BackColor = Color.Silver;
-                }
-            }
         }
         private void saveAsSousToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -273,7 +216,6 @@ namespace WUI
                 }
             }
         }
-
         private void importDocumentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -287,8 +229,25 @@ namespace WUI
                 }
             }
             FillSuppliers();
+            suppliersDataGridView.Rows[0].Selected = false;
         }
-
+        private void newDocumentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Suppliers = new List<Supplier>();
+            CheckSuppliersCountToSwitchEnabledListButton();
+            ClearTextBoxs();
+            if (modifyButton.Enabled)
+                EnabledSwitchModifyAndRemoveButton();
+            FillSuppliers();
+            FilePath = null;
+            Supplier._ID = 1;
+        }
+        /// <summary>
+        /// Contact BLL to ask DAL to read a file path and return a Ilist of suppliers.
+        /// </summary>
+        /// <param name="pPath">string file path</param>
+        /// <returns>An Ilist of suppliers.</returns>
+        /// <exception cref="Exception"></exception>
         private void GetSuppliersImport()
         {
             try
@@ -300,16 +259,69 @@ namespace WUI
                 MessageBox.Show("Format du csv incompatible");
             }
         }
-
-        private void newDocumentToolStripMenuItem_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Fill datagrid with an Ilist of suppliers
+        /// </summary>
+        private void FillSuppliers()
         {
-            Suppliers = new List<Supplier>();
-            CheckSuppliersCountToDisableButton();
-            ClearTextBoxs();
-            EnableConfirmButton();
-            FillSuppliers();
-            FilePath = null;
-            Supplier._ID = 1;
+            suppliersDataGridView.Rows.Clear();
+            foreach (Supplier supplier in Suppliers)
+            {
+                suppliersDataGridView.Rows.Add(supplier.ID, supplier.Name, supplier.Ordered);
+            }
+        }
+        /// <summary>
+        /// Clear All textboxs and checkbox
+        /// </summary>
+        private void ClearTextBoxs()
+        {
+            nameTextBox.Text = "";
+            phoneNumberTextBox.Text = "";
+            emailAddressTextBox.Text = "";
+            cityTextBox.Text = "";
+            orderedCheckBox.Checked = false;
+        }
+        /// <summary>
+        /// Enable or disable Modify and Remove buttons
+        /// </summary>
+        private void EnabledSwitchModifyAndRemoveButton()
+        {
+            if (modifyButton.Enabled && removeButton.Enabled)
+            {
+                modifyButton.Enabled = false;
+                modifyButton.BackColor = Color.Silver;
+                removeButton.Enabled = false;
+                removeButton.BackColor = Color.Silver;
+            }
+            else
+            {
+                modifyButton.Enabled = true;
+                modifyButton.BackColor = Color.DarkCyan;
+                removeButton.Enabled = true;
+                removeButton.BackColor = Color.DarkCyan;
+            }
+        }
+        /// <summary>
+        /// Check if suppliers count is more than 0 to enable list button
+        /// </summary>
+        private void CheckSuppliersCountToSwitchEnabledListButton()
+        {
+            if (Suppliers.Count > 0)
+            {
+                if (!listButton.Enabled)
+                {
+                    listButton.Enabled = true;
+                    listButton.BackColor = Color.DarkCyan;
+                }
+            }
+            else
+            {
+                if (listButton.Enabled)
+                {
+                    listButton.Enabled = false;
+                    listButton.BackColor = Color.Silver;
+                }
+            }
         }
     }
 }
