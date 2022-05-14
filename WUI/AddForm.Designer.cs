@@ -46,14 +46,14 @@
             this.leftArrowButton = new System.Windows.Forms.Button();
             this.rightArrowButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cancelModifyButton = new System.Windows.Forms.Button();
             this.confirmModifyButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
+            this.cancelModifyButton = new System.Windows.Forms.Button();
             this.orderedCheckBox = new System.Windows.Forms.CheckBox();
+            this.searchButton = new System.Windows.Forms.Button();
             this.orderedLabel = new System.Windows.Forms.Label();
             this.cityTextBox = new System.Windows.Forms.TextBox();
             this.cityLabel = new System.Windows.Forms.Label();
-            this.searchButton = new System.Windows.Forms.Button();
             this.emailAddressTextBox = new System.Windows.Forms.TextBox();
             this.emailAddressLabel = new System.Windows.Forms.Label();
             this.validEmailAddressLabel = new System.Windows.Forms.Label();
@@ -70,8 +70,6 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.plusButton = new System.Windows.Forms.Button();
-            this.LoupeButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -105,7 +103,7 @@
             // 
             this.newDocumentToolStripMenuItem.Name = "newDocumentToolStripMenuItem";
             this.newDocumentToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newDocumentToolStripMenuItem.Size = new System.Drawing.Size(269, 22);
+            this.newDocumentToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.newDocumentToolStripMenuItem.Text = "Nouveau Document";
             this.newDocumentToolStripMenuItem.Click += new System.EventHandler(this.newDocumentToolStripMenuItem_Click);
             // 
@@ -113,7 +111,7 @@
             // 
             this.importDocumentToolStripMenuItem.Name = "importDocumentToolStripMenuItem";
             this.importDocumentToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.importDocumentToolStripMenuItem.Size = new System.Drawing.Size(269, 22);
+            this.importDocumentToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.importDocumentToolStripMenuItem.Text = "Importer Document";
             this.importDocumentToolStripMenuItem.Click += new System.EventHandler(this.importDocumentToolStripMenuItem_Click);
             // 
@@ -121,7 +119,7 @@
             // 
             this.saveDocumentToolStripMenuItem.Name = "saveDocumentToolStripMenuItem";
             this.saveDocumentToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveDocumentToolStripMenuItem.Size = new System.Drawing.Size(269, 22);
+            this.saveDocumentToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.saveDocumentToolStripMenuItem.Text = "Sauvegarder Document";
             this.saveDocumentToolStripMenuItem.Click += new System.EventHandler(this.saveDocumentToolStripMenuItem_Click);
             // 
@@ -130,7 +128,7 @@
             this.saveAsSousToolStripMenuItem.Name = "saveAsSousToolStripMenuItem";
             this.saveAsSousToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.saveAsSousToolStripMenuItem.Size = new System.Drawing.Size(269, 22);
+            this.saveAsSousToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
             this.saveAsSousToolStripMenuItem.Text = "Sauvegarder Sous";
             this.saveAsSousToolStripMenuItem.Click += new System.EventHandler(this.saveAsSousToolStripMenuItem_Click);
             // 
@@ -211,21 +209,6 @@
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             // 
-            // cancelModifyButton
-            // 
-            this.cancelModifyButton.BackColor = System.Drawing.Color.DarkCyan;
-            this.cancelModifyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelModifyButton.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cancelModifyButton.ForeColor = System.Drawing.Color.White;
-            this.cancelModifyButton.Location = new System.Drawing.Point(202, 281);
-            this.cancelModifyButton.Name = "cancelModifyButton";
-            this.cancelModifyButton.Size = new System.Drawing.Size(160, 50);
-            this.cancelModifyButton.TabIndex = 29;
-            this.cancelModifyButton.Text = "Annuler";
-            this.cancelModifyButton.UseVisualStyleBackColor = false;
-            this.cancelModifyButton.Visible = false;
-            this.cancelModifyButton.Click += new System.EventHandler(this.cancelModifyButton_Click);
-            // 
             // confirmModifyButton
             // 
             this.confirmModifyButton.BackColor = System.Drawing.Color.DarkCyan;
@@ -255,6 +238,21 @@
             this.addButton.UseVisualStyleBackColor = false;
             this.addButton.Click += new System.EventHandler(this.addButton_Click_1);
             // 
+            // cancelModifyButton
+            // 
+            this.cancelModifyButton.BackColor = System.Drawing.Color.DarkCyan;
+            this.cancelModifyButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancelModifyButton.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cancelModifyButton.ForeColor = System.Drawing.Color.White;
+            this.cancelModifyButton.Location = new System.Drawing.Point(202, 281);
+            this.cancelModifyButton.Name = "cancelModifyButton";
+            this.cancelModifyButton.Size = new System.Drawing.Size(160, 50);
+            this.cancelModifyButton.TabIndex = 29;
+            this.cancelModifyButton.Text = "Annuler";
+            this.cancelModifyButton.UseVisualStyleBackColor = false;
+            this.cancelModifyButton.Visible = false;
+            this.cancelModifyButton.Click += new System.EventHandler(this.cancelModifyButton_Click);
+            // 
             // orderedCheckBox
             // 
             this.orderedCheckBox.AutoSize = true;
@@ -263,6 +261,20 @@
             this.orderedCheckBox.Size = new System.Drawing.Size(15, 14);
             this.orderedCheckBox.TabIndex = 13;
             this.orderedCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // searchButton
+            // 
+            this.searchButton.BackColor = System.Drawing.Color.DarkCyan;
+            this.searchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.searchButton.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.searchButton.ForeColor = System.Drawing.Color.White;
+            this.searchButton.Location = new System.Drawing.Point(202, 281);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(160, 50);
+            this.searchButton.TabIndex = 28;
+            this.searchButton.Text = "Rechercher";
+            this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // orderedLabel
             // 
@@ -290,20 +302,6 @@
             this.cityLabel.Size = new System.Drawing.Size(63, 30);
             this.cityLabel.TabIndex = 10;
             this.cityLabel.Text = "Ville :";
-            // 
-            // searchButton
-            // 
-            this.searchButton.BackColor = System.Drawing.Color.DarkCyan;
-            this.searchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.searchButton.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.searchButton.ForeColor = System.Drawing.Color.White;
-            this.searchButton.Location = new System.Drawing.Point(202, 281);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(160, 50);
-            this.searchButton.TabIndex = 28;
-            this.searchButton.Text = "Rechercher";
-            this.searchButton.UseVisualStyleBackColor = false;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // emailAddressTextBox
             // 
@@ -510,39 +508,13 @@
             this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dataGridViewCheckBoxColumn1.Width = 75;
             // 
-            // plusButton
-            // 
-            this.plusButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("plusButton.BackgroundImage")));
-            this.plusButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.plusButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.plusButton.ForeColor = System.Drawing.Color.White;
-            this.plusButton.Location = new System.Drawing.Point(1176, 360);
-            this.plusButton.Name = "plusButton";
-            this.plusButton.Size = new System.Drawing.Size(31, 43);
-            this.plusButton.TabIndex = 31;
-            this.plusButton.UseVisualStyleBackColor = true;
-            // 
-            // LoupeButton
-            // 
-            this.LoupeButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("LoupeButton.BackgroundImage")));
-            this.LoupeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.LoupeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LoupeButton.ForeColor = System.Drawing.Color.White;
-            this.LoupeButton.Location = new System.Drawing.Point(1156, 418);
-            this.LoupeButton.Name = "LoupeButton";
-            this.LoupeButton.Size = new System.Drawing.Size(51, 50);
-            this.LoupeButton.TabIndex = 32;
-            this.LoupeButton.UseVisualStyleBackColor = true;
-            // 
             // AddForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1219, 507);
-            this.Controls.Add(this.LoupeButton);
             this.Controls.Add(this.leftArrowButton);
-            this.Controls.Add(this.plusButton);
             this.Controls.Add(this.rightArrowButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.listButton);
@@ -607,10 +579,8 @@
         private DataGridView suppliersDataGridView;
         private Button confirmModifyButton;
         private Button cancelModifyButton;
-        private Button plusButton;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-        private Button LoupeButton;
     }
 }

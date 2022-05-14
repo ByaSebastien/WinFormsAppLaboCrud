@@ -228,6 +228,7 @@ namespace WUI
                     GetSuppliersImport();
                 }
             }
+            CheckSuppliersCountToSwitchEnabledListButton();
             FillSuppliers();
             suppliersDataGridView.Rows[0].Selected = false;
         }
