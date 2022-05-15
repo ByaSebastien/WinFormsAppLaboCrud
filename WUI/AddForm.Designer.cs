@@ -282,9 +282,9 @@
             this.orderedLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.orderedLabel.Location = new System.Drawing.Point(14, 231);
             this.orderedLabel.Name = "orderedLabel";
-            this.orderedLabel.Size = new System.Drawing.Size(213, 30);
+            this.orderedLabel.Size = new System.Drawing.Size(216, 30);
             this.orderedLabel.TabIndex = 12;
-            this.orderedLabel.Text = "Commande en cour :";
+            this.orderedLabel.Text = "Commande en cours:";
             // 
             // cityTextBox
             // 
